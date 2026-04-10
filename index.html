@@ -3,164 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HBD_MY_BESTIE_V4.0</title>
-
-<!-- 폰트 -->
-<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<title>HBD_MY_BESTIE_V5.2</title>
 
 <style>
+/* ✅ 폰트 (유지) */
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/DungGeunMo.woff') format('woff');
+}
+
+/* 1. 배경 컬러 및 효과 현대화 */
 body {
-    background-color: #000;
+    background-color: #0c001a; /* deep neon purple */
     background-image: 
         linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
-    color: #fff;
-    font-family: 'Pretendard', monospace;
+        linear-gradient(90deg, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px; /* 격자 크기 살짝 키움 */
 
+    font-family: 'DungGeunMo', monospace;
     display: flex;
     justify-content: center;
     align-items: center;
-
     min-height: 100vh;
     margin: 0;
-    overflow-y: auto;
     padding: 20px;
-
-    animation: flicker 3s infinite;
+    animation: crtEffect 4s infinite; /* 효과 이름 구체화 */
 }
 
-/* CRT 느낌 */
-@keyframes flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.97; }
+@keyframes crtEffect {
+    0%, 100% { opacity: 1; filter: sepia(0.1) contrast(1.1); }
+    50% { opacity: 0.99; filter: sepia(0) contrast(1); }
 }
 
-/* 창 */
+/* 2. 윈도우 창 컬러 및 그림자 현대화 */
 .window {
-    background: #c0c0c0;
+    background: #e0e0e0; /* 밝은 cyber silver */
     border: 3px solid;
-    border-color: #fff #808080 #808080 #fff;
+    border-color: #fff #a0a0a0 #a0a0a0 #fff; /* 테두리색 부드럽게 */
     width: 100%;
-    max-width: 420px;
-    padding: 2px;
-    box-shadow: 10px 10px 0px #ff00ff;
+    max-width: 440px;
+    padding: 3px;
+    box-shadow: 15px 15px 0px rgba(255, 0, 255, 0.6); /* 네온 핑크 그림자 투명도 */
+
+    transform: translateY(10px);
+    animation: float 2s ease-in-out infinite alternate;
+    transition: 0.3s;
 }
 
+.window:hover {
+    transform: translateY(0px) scale(1.02);
+    box-shadow: 20px 20px 0px rgba(0, 255, 255, 0.6); /* 호버 시 네온 블루 그림자 */
+}
+
+@keyframes float {
+    from { transform: translateY(10px); }
+    to { transform: translateY(-5px); }
+}
+
+/* 3. 타이틀바 그라디언트 수정 */
 .title-bar {
-    background: linear-gradient(90deg, #000080, #1084d0);
-    color: white;
-    padding: 5px 10px;
+    background: linear-gradient(90deg, #ff00ff, #00ffff); /* 홀로그램 그라디언트 */
+    color: #000; /* 글자색 검정으로 변경해 가독성 확보 */
+    padding: 7px 12px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
+    font-size: 14px;
 }
 
-/* 내용 */
 .content {
-    padding: 20px;
+    padding: 25px;
     text-align: center;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.95); /* 살짝 투명하게 */
     color: #000;
-    margin: 2px;
+    margin: 3px;
     border: 2px inset #fff;
 }
 
-/* 타이틀 */
 h1 {
-    font-size: 2.2rem;
+    font-size: 2.3rem;
     color: #ff00ff;
-    text-shadow: 2px 2px #00ffff;
-    margin: 10px 0;
+    text-shadow: 2px 2px 0px #00ffff;
+    margin: 15px 0;
     animation: blink 0.8s infinite;
+    letter-spacing: 3px;
 }
 
 @keyframes blink {
     50% { opacity: 0; }
 }
 
-/* 프로필 */
+/* 4. 프로필 영역 패턴 추가 */
 .profile {
     font-size: 13px;
     text-align: left;
-    margin: 10px 0;
-    padding: 10px;
-    background: #eef;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #fdfdfd;
+    background-image: radial-gradient(#a0a0a0 0.5px, transparent 0.5px); /* 미세한 도트 패턴 */
+    background-size: 5px 5px;
     border: 1px solid #000;
-    line-height: 1.6;
+    line-height: 1.8;
 }
 
-/* 사진 */
 .photo-zone {
-    width: 150px;
-    height: 150px;
-    margin: 15px auto;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
     border: 3px double #000;
     background: #eee;
     overflow: hidden;
+    box-shadow: 5px 5px 0px #a0a0a0; /* 사진에 입체감 추가 */
 }
 
 .photo-zone img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: contrast(120%) saturate(150%);
+    filter: contrast(110%) saturate(130%) sepia(0.1); /* 폴라로이드 감성 */
 }
 
-/* 메시지 */
 .message {
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.9;
     border: 1px dashed #ff00ff;
-    padding: 12px;
-    background: #fdfdfd;
-    margin-top: 10px;
+    padding: 15px;
+    background: #fff;
+    margin-top: 15px;
+    letter-spacing: 0.3px;
 }
 
-/* 숨겨진 메시지 */
 .hidden {
     display: none;
-    margin-top: 10px;
-    font-size: 13px;
-    color: #333;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ff00ff;
+    font-weight: bold;
+    animation: fadeIn 1s ease forwards;
 }
 
-/* 버튼 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 5. 버튼 컬러 현대화 */
 button {
-    margin-top: 15px;
+    margin-top: 20px;
     padding: 12px;
     width: 100%;
-    background: #c0c0c0;
+    background: #00ffff; /* Cyber cyan */
+    color: #000;
     border: 2px solid;
-    border-color: #fff #808080 #808080 #fff;
+    border-color: #fff #008080 #008080 #fff; /* 테두리색 변경 */
     cursor: pointer;
     font-weight: bold;
-}
-
-button:active {
-    border-color: #808080 #fff #fff #808080;
+    font-family: 'DungGeunMo';
+    font-size: 15px;
+    transition: 0.1s;
 }
 
 button:hover {
-    background: #ff00ff;
-    color: white;
+    background: #ff00ff; /* Neon magenta */
+    color: #fff;
+    transform: scale(1.02);
 }
 
-/* 장식 */
+button:active {
+    border-color: #008080 #fff #fff #008080;
+    transform: translateY(2px);
+}
+
 .decor {
     position: absolute;
-    font-size: 24px;
-    z-index: -1;
+    font-size: 30px;
+    filter: drop-shadow(2px 2px 0px #ff00ff); /* 장식에 네온 효과 */
 }
 </style>
 </head>
 
 <body>
 
-<div class="decor" style="top: 10%; left: 10%;">⭐</div>
-<div class="decor" style="top: 20%; right: 15%;">💿</div>
-<div class="decor" style="bottom: 15%; left: 20%;">🦋</div>
-<div class="decor" style="bottom: 10%; right: 10%;">✨</div>
+<div class="decor" style="top: 12%; left: 8%;">⭐</div>
+<div class="decor" style="top: 18%; right: 10%;">💿</div>
+<div class="decor" style="bottom: 15%; left: 10%;">🦋</div>
+<div class="decor" style="bottom: 12%; right: 5%;">✨</div>
 
 <div class="window">
     <div class="title-bar">
@@ -169,10 +196,9 @@ button:hover {
     </div>
 
     <div class="content">
-        <p style="font-size: 11px;">2026.4.11 김태은의 생일</p>
+        <p style="font-size: 11px; color: #666;">2026.4.11 김태은의 생일</p>
         <h1>FOR_YOU_ONLY</h1>
 
-        <!-- 프로필 -->
         <div class="profile">
             <p><b>이름:</b> 김태은</p>
             <p><b>타입:</b> 차가운 것 같지만 따듯한 사람</p>
@@ -180,33 +206,35 @@ button:hover {
             <p><b>효과:</b> 주변 행복도 상승</p>
         </div>
 
-        <!-- 사진 -->
         <div class="photo-zone">
-            <img src="https://via.placeholder.com/150">
+            <img src="https://via.placeholder.com/180" alt="HBD 태은">
         </div>
 
-        <!-- 메시지 -->
         <div class="message">
             HAPPY BIRTHDAY 🎂<br>
             너는 진짜 좋은 사람이야, 내가 확실하게 말할 수 있을 만큼.<br>
-            같이 있으면 괜히 마음이 편해지고 좋아.<br>
-            그래서 더 잘됐으면 좋겠고, 더 행복했으면 좋겠어.<br>
-            오늘은 꼭 너답게, 제일 빛나는 하루 보내 ✨
+            같이 있으면 마음이 편안해지고 좋아.<br>
+            너의 모든 날들이 반짝반짝 빛나길 응원해 ✨
         </div>
 
-        <!-- 숨겨진 메시지 -->
         <div id="secret" class="hidden">
-            사실 너랑 보낸 시간들 전부 다 소중했어.<br>
-            앞으로도 계속 같이 웃자 😊
+            "사실 너랑 함께한 모든 순간이 나에겐 행운이야.<br>
+            앞으로도 오래오래 즐겁게 지내자! 😊"
         </div>
 
-        <button onclick="reveal()">우리들의 추억 ▶</button>
+        <button onclick="reveal()">추억 압축 해제 ▶</button>
     </div>
 </div>
 
 <script>
 function reveal() {
-    document.getElementById("secret").style.display = "block";
+    const secret = document.getElementById("secret");
+    secret.style.display = "block";
+    const btn = document.querySelector("button");
+    btn.innerText = "MISSION COMPLETE 💖";
+    btn.style.background = "#fff";
+    btn.style.color = "#ff00ff";
+    btn.style.borderColor = "#ff00ff";
 }
 </script>
 
