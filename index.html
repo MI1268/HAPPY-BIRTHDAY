@@ -3,239 +3,703 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HBD_MY_BESTIE_V5.2</title>
+<title>김태은의 작은 창</title>
 
 <style>
-/* ✅ 폰트 (유지) */
-@font-face {
-    font-family: 'DungGeunMo';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/DungGeunMo.woff') format('woff');
+*{
+    box-sizing:border-box;
 }
 
-/* 1. 배경 컬러 및 효과 현대화 */
-body {
-    background-color: #0c001a; /* deep neon purple */
-    background-image: 
-        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px; /* 격자 크기 살짝 키움 */
-
-    font-family: 'DungGeunMo', monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-    animation: crtEffect 4s infinite; /* 효과 이름 구체화 */
+:root{
+    --배경:#100d12;
+    --배경2:#1a131c;
+    --연종이:#f7eef3;
+    --흰색:#ffffff;
+    --검정:#111111;
+    --진핑크:#ff5fa8;
+    --중핑크:#ff9fcb;
+    --연핑크:#ffdceb;
+    --포인트:#ff3f97;
+    --그림자:rgba(255,95,168,0.18);
+    --점선:#ff9bc7;
 }
 
-@keyframes crtEffect {
-    0%, 100% { opacity: 1; filter: sepia(0.1) contrast(1.1); }
-    50% { opacity: 0.99; filter: sepia(0) contrast(1); }
+body{
+    margin:0;
+    min-height:100vh;
+    padding:18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        radial-gradient(circle at 18% 20%, rgba(255,95,168,0.18), transparent 24%),
+        radial-gradient(circle at 82% 26%, rgba(255,180,220,0.14), transparent 26%),
+        radial-gradient(circle at 70% 78%, rgba(255,95,168,0.10), transparent 24%),
+        linear-gradient(180deg, var(--배경), var(--배경2));
+    font-family:"궁서", serif;
+    overflow-x:hidden;
+    position:relative;
 }
 
-/* 2. 윈도우 창 컬러 및 그림자 현대화 */
-.window {
-    background: #e0e0e0; /* 밝은 cyber silver */
-    border: 3px solid;
-    border-color: #fff #a0a0a0 #a0a0a0 #fff; /* 테두리색 부드럽게 */
-    width: 100%;
-    max-width: 440px;
-    padding: 3px;
-    box-shadow: 15px 15px 0px rgba(255, 0, 255, 0.6); /* 네온 핑크 그림자 투명도 */
-
-    transform: translateY(10px);
-    animation: float 2s ease-in-out infinite alternate;
-    transition: 0.3s;
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    filter:blur(48px);
+    pointer-events:none;
+    opacity:.16;
+    z-index:0;
 }
 
-.window:hover {
-    transform: translateY(0px) scale(1.02);
-    box-shadow: 20px 20px 0px rgba(0, 255, 255, 0.6); /* 호버 시 네온 블루 그림자 */
+body::before{
+    background:#ff8abb;
+    top:12px;
+    left:6px;
 }
 
-@keyframes float {
-    from { transform: translateY(10px); }
-    to { transform: translateY(-5px); }
+body::after{
+    background:#ffc1df;
+    right:8px;
+    bottom:16px;
 }
 
-/* 3. 타이틀바 그라디언트 수정 */
-.title-bar {
-    background: linear-gradient(90deg, #ff00ff, #00ffff); /* 홀로그램 그라디언트 */
-    color: #000; /* 글자색 검정으로 변경해 가독성 확보 */
-    padding: 7px 12px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
+.반짝{
+    position:fixed;
+    pointer-events:none;
+    user-select:none;
+    color:#ff86bd;
+    text-shadow:0 0 8px rgba(255,95,168,0.4);
+    z-index:0;
+    animation:깜빡 2.4s ease-in-out infinite;
 }
 
-.content {
-    padding: 25px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.95); /* 살짝 투명하게 */
-    color: #000;
-    margin: 3px;
-    border: 2px inset #fff;
+.반짝1{ top:56px; right:56px; font-size:22px; }
+.반짝2{ bottom:54px; left:42px; font-size:20px; }
+.반짝3{ top:145px; left:72px; font-size:16px; }
+
+@keyframes 깜빡{
+    0%,100%{ opacity:.65; transform:translateY(0); }
+    50%{ opacity:1; transform:translateY(-3px); }
 }
 
-h1 {
-    font-size: 2.3rem;
-    color: #ff00ff;
-    text-shadow: 2px 2px 0px #00ffff;
-    margin: 15px 0;
-    animation: blink 0.8s infinite;
-    letter-spacing: 3px;
+.창{
+    position:relative;
+    z-index:1;
+    width:min(920px, 100%);
+    background:var(--연종이);
+    border:2px solid #000;
+    box-shadow:
+        0 0 0 2px #111,
+        12px 12px 0 var(--그림자),
+        0 0 26px rgba(255,95,168,0.10);
+    animation:둥실 3.1s ease-in-out infinite;
 }
 
-@keyframes blink {
-    50% { opacity: 0; }
+@keyframes 둥실{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-4px); }
 }
 
-/* 4. 프로필 영역 패턴 추가 */
-.profile {
-    font-size: 13px;
-    text-align: left;
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #fdfdfd;
-    background-image: radial-gradient(#a0a0a0 0.5px, transparent 0.5px); /* 미세한 도트 패턴 */
-    background-size: 5px 5px;
-    border: 1px solid #000;
-    line-height: 1.8;
+.제목줄{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(90deg, var(--진핑크), var(--중핑크));
+    color:#111;
+    padding:8px 10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-weight:bold;
+    border-bottom:1px solid #000;
 }
 
-.photo-zone {
-    width: 180px;
-    height: 180px;
-    margin: 20px auto;
-    border: 3px double #000;
-    background: #eee;
-    overflow: hidden;
-    box-shadow: 5px 5px 0px #a0a0a0; /* 사진에 입체감 추가 */
+.제목줄::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-30%;
+    width:30%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+    animation:빛지남 3.5s linear infinite;
 }
 
-.photo-zone img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: contrast(110%) saturate(130%) sepia(0.1); /* 폴라로이드 감성 */
+@keyframes 빛지남{
+    0%{ left:-30%; }
+    100%{ left:120%; }
 }
 
-.message {
-    font-size: 14px;
-    line-height: 1.9;
-    border: 1px dashed #ff00ff;
-    padding: 15px;
-    background: #fff;
-    margin-top: 15px;
-    letter-spacing: 0.3px;
+.제목왼쪽{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
-.hidden {
-    display: none;
-    margin-top: 15px;
-    font-size: 14px;
-    color: #ff00ff;
-    font-weight: bold;
-    animation: fadeIn 1s ease forwards;
+.점세개{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#fff;
+    border:1px solid #111;
+    box-shadow:14px 0 0 #ffd7ea, 28px 0 0 #ff9cc9;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.창제목{
+    margin-left:36px;
 }
 
-/* 5. 버튼 컬러 현대화 */
-button {
-    margin-top: 20px;
-    padding: 12px;
-    width: 100%;
-    background: #00ffff; /* Cyber cyan */
-    color: #000;
-    border: 2px solid;
-    border-color: #fff #008080 #008080 #fff; /* 테두리색 변경 */
-    cursor: pointer;
-    font-weight: bold;
-    font-family: 'DungGeunMo';
-    font-size: 15px;
-    transition: 0.1s;
+.창버튼{
+    display:flex;
+    gap:6px;
 }
 
-button:hover {
-    background: #ff00ff; /* Neon magenta */
-    color: #fff;
-    transform: scale(1.02);
+.창버튼칸{
+    width:18px;
+    height:18px;
+    border:1px solid #111;
+    background:#fff4fa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    line-height:1;
 }
 
-button:active {
-    border-color: #008080 #fff #fff #008080;
-    transform: translateY(2px);
+.메뉴줄{
+    background:#111;
+    color:#fff;
+    padding:8px 10px;
+    font-size:12px;
+    border-bottom:1px solid #000;
+    white-space:nowrap;
+    overflow-x:auto;
 }
 
-.decor {
-    position: absolute;
-    font-size: 30px;
-    filter: drop-shadow(2px 2px 0px #ff00ff); /* 장식에 네온 효과 */
+.윗영역{
+    padding:18px;
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:18px;
+    background:var(--연종이);
+}
+
+.프로필,
+.소개,
+.작은상자,
+.탭 > div,
+.한줄상자,
+.하단띠{
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.프로필{
+    position:relative;
+    border:2px solid #000;
+    background:#fff;
+    padding:12px;
+    text-align:center;
+}
+
+.프로필::before{
+    content:"♡";
+    position:absolute;
+    top:-10px;
+    right:10px;
+    background:#fff1f8;
+    border:1px solid #000;
+    padding:4px 8px;
+    color:var(--포인트);
+    transform:rotate(8deg);
+    font-size:14px;
+}
+
+.프로필:hover,
+.소개:hover,
+.작은상자:hover,
+.한줄상자:hover{
+    transform:translateY(-4px);
+    box-shadow:6px 6px 0 var(--그림자);
+}
+
+.프로필틀{
+    position:relative;
+    padding:8px;
+    border:2px solid var(--중핑크);
+    background:linear-gradient(180deg, #fff8fc, #ffe8f2);
+    margin-bottom:12px;
+}
+
+.프로필틀::after{
+    content:"대표 사진";
+    position:absolute;
+    right:10px;
+    bottom:-10px;
+    background:#fff8fc;
+    border:1px solid #111;
+    padding:2px 8px;
+    transform:rotate(-4deg);
+    font-size:12px;
+}
+
+.프로필 img{
+    width:100%;
+    max-width:500px;
+    aspect-ratio:1 / 1;
+    object-fit:cover;
+    display:block;
+    margin:0 auto;
+    border:2px solid #000;
+    filter:contrast(1.04) saturate(1.03);
+}
+
+.프로필 h2{
+    margin:10px 0 6px;
+    color:var(--포인트);
+    font-size:21px;
+}
+
+.프로필 p{
+    margin:6px 0;
+    font-size:13px;
+    line-height:1.65;
+}
+
+.무드표시{
+    display:inline-block;
+    margin-top:8px;
+    padding:5px 10px;
+    background:#fff2f8;
+    border:1px solid #111;
+    color:var(--포인트);
+    transform:rotate(-2deg);
+    font-size:13px;
+}
+
+.소개{
+    position:relative;
+    border:2px solid #000;
+    background:#fff;
+    padding:16px;
+}
+
+.소개::before{
+    content:"귀여운 메모";
+    position:absolute;
+    top:-12px;
+    left:14px;
+    background:#ffe5f1;
+    border:1px solid #111;
+    padding:3px 8px;
+    font-size:12px;
+}
+
+.소개 h2{
+    margin:0 0 10px;
+    color:var(--포인트);
+    font-size:22px;
+}
+
+.소개 p{
+    margin:0;
+    font-size:13px;
+    line-height:1.9;
+}
+
+.작은메모{
+    position:relative;
+    margin-top:12px;
+    padding:10px;
+    background:#fff7fb;
+    border:1px dashed var(--점선);
+    font-size:12px;
+    line-height:1.8;
+}
+
+.작은메모::after{
+    content:"✦";
+    position:absolute;
+    top:8px;
+    right:10px;
+    color:var(--진핑크);
+    font-size:14px;
+}
+
+.탭{
+    margin-top:12px;
+    display:flex;
+    border:2px solid #000;
+    background:#fff;
+}
+
+.탭 > div{
+    flex:1;
+    padding:9px 8px;
+    text-align:center;
+    background:#ffe3f0;
+    border-right:1px solid #000;
+    font-size:12px;
+}
+
+.탭 > div:last-child{
+    border-right:none;
+}
+
+.탭 > div:hover{
+    background:#ffbfdc;
+    transform:translateY(-2px);
+}
+
+.선택됨{
+    background:#ffd5e8 !important;
+}
+
+.선택됨::after{
+    content:" ♡";
+    color:var(--포인트);
+}
+
+.한줄상자{
+    margin-top:12px;
+    border:2px solid #000;
+    background:#fff7fb;
+    padding:10px 12px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.한줄상자 span{
+    display:inline-block;
+    padding:5px 10px;
+    background:#ffe5f1;
+    border:1px solid #111;
+    font-size:11px;
+}
+
+.아랫영역{
+    padding:0 18px 18px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    background:var(--연종이);
+}
+
+.작은상자{
+    position:relative;
+    min-height:155px;
+    border:2px solid #000;
+    background:#fff;
+    padding:12px;
+}
+
+.작은상자 h3{
+    margin:0 0 10px;
+    color:var(--포인트);
+    font-size:16px;
+}
+
+.작은상자 p{
+    margin:0;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.작은상자 img{
+    width:100%;
+    display:block;
+    margin-top:6px;
+    border:2px solid #000;
+    filter:contrast(1.04) saturate(1.03);
+}
+
+.새상자::before{
+    content:"새로움!";
+    position:absolute;
+    top:-11px;
+    right:10px;
+    background:#fff2f8;
+    border:1px solid #111;
+    padding:2px 8px;
+    color:var(--포인트);
+    transform:rotate(6deg);
+    font-size:12px;
+}
+
+.목록{
+    font-size:12px;
+    line-height:1.9;
+    color:#333;
+}
+
+.말풍선{
+    margin-top:8px;
+    padding:8px 10px;
+    background:#fff4fa;
+    border:1px dashed #ff9ec9;
+    font-size:13px;
+}
+
+.하단띠{
+    position:relative;
+    margin:0 18px 18px;
+    border:2px solid #000;
+    background:linear-gradient(90deg, #ffd1e6, #ffedf5);
+    padding:14px 0;
+    overflow:hidden;
+}
+
+.하단띠::before{
+    content:"♡";
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--포인트);
+}
+
+.하단띠::after{
+    content:"✦";
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--포인트);
+}
+
+.흐르는글{
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+.흐르는글 span{
+    display:inline-block;
+    padding-left:100%;
+    color:#ff3f97;
+    animation:흐르기 12s linear infinite;
+}
+
+@keyframes 흐르기{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+}
+
+.상태줄{
+    background:#111;
+    color:#ffd7ea;
+    padding:8px 10px;
+    border-top:1px solid #000;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    font-size:11px;
+}
+
+.커서반짝{
+    position:fixed;
+    width:10px;
+    height:10px;
+    pointer-events:none;
+    border-radius:50%;
+    background:rgba(255,95,168,0.92);
+    transform:translate(-50%,-50%);
+    box-shadow:0 0 10px rgba(255,95,168,0.45);
+    z-index:9999;
+}
+
+@media (max-width:900px){
+    .윗영역{
+        grid-template-columns:1fr;
+    }
+
+    .프로필 img{
+        max-width:min(500px, 100%);
+    }
+}
+
+@media (max-width:760px){
+    body{
+        padding:12px;
+        align-items:flex-start;
+    }
+
+    .창{
+        width:100%;
+        max-width:100%;
+        box-shadow:
+            0 0 0 2px #111,
+            6px 6px 0 var(--그림자),
+            0 0 20px rgba(255,95,168,0.08);
+    }
+
+    .윗영역{
+        padding:14px;
+        gap:14px;
+    }
+
+    .탭{
+        flex-wrap:wrap;
+    }
+
+    .탭 > div{
+        flex:1 1 50%;
+        border-bottom:1px solid #000;
+    }
+
+    .탭 > div:nth-child(2n){
+        border-right:none;
+    }
+
+    .아랫영역{
+        padding:0 14px 14px;
+        grid-template-columns:1fr;
+        gap:14px;
+    }
+
+    .하단띠{
+        margin:0 14px 14px;
+    }
+
+    .반짝{
+        display:none;
+    }
 }
 </style>
 </head>
-
 <body>
 
-<div class="decor" style="top: 12%; left: 8%;">⭐</div>
-<div class="decor" style="top: 18%; right: 10%;">💿</div>
-<div class="decor" style="bottom: 15%; left: 10%;">🦋</div>
-<div class="decor" style="bottom: 12%; right: 5%;">✨</div>
+<div class="반짝 반짝1">✦</div>
+<div class="반짝 반짝2">♡</div>
+<div class="반짝 반짝3">✧</div>
 
-<div class="window">
-    <div class="title-bar">
-        <span>About_You 김태은.exe</span>
-        <span>[X]</span>
+<div class="창">
+
+    <div class="제목줄">
+        <div class="제목왼쪽">
+            <div class="점세개"></div>
+            <span class="창제목">김태은의 작은 창</span>
+        </div>
+        <div class="창버튼">
+            <div class="창버튼칸">─</div>
+            <div class="창버튼칸">□</div>
+            <div class="창버튼칸">×</div>
+        </div>
     </div>
 
-    <div class="content">
-        <p style="font-size: 11px; color: #666;">2026.4.11 김태은의 생일</p>
-        <h1>FOR_YOU_ONLY</h1>
-
-        <div class="profile">
-            <p><b>이름:</b> 김태은</p>
-            <p><b>타입:</b> 차가운 것 같지만 따듯한 사람</p>
-            <p><b>능력:</b> 사람의 마음을 따듯하게 만들기</p>
-            <p><b>효과:</b> 주변 행복도 상승</p>
-        </div>
-
-        <div class="photo-zone">
-            <img src="https://via.placeholder.com/180" alt="HBD 태은">
-        </div>
-
-        <div class="message">
-            HAPPY BIRTHDAY 🎂<br>
-            너는 진짜 좋은 사람이야, 내가 확실하게 말할 수 있을 만큼.<br>
-            같이 있으면 마음이 편안해지고 좋아.<br>
-            너의 모든 날들이 반짝반짝 빛나길 응원해 ✨
-        </div>
-
-        <div id="secret" class="hidden">
-            "사실 너랑 함께한 모든 순간이 나에겐 행운이야.<br>
-            앞으로도 오래오래 즐겁게 지내자! 😊"
-        </div>
-
-        <button onclick="reveal()">추억 압축 해제 ▶</button>
+    <div class="메뉴줄">
+        소개 · 사진첩 · 기록장 · 방명록 · 즐겨보기
     </div>
+
+    <div class="윗영역">
+
+        <div class="프로필">
+            <div class="프로필틀">
+                <img src="https://via.placeholder.com/500x500/f4d7e7/444444?text=%EA%B9%80%ED%83%9C%EC%9D%80" alt="프로필 이미지">
+            </div>
+            <h2>김태은</h2>
+            <p>오늘의 무드 : 핑크 Y2K ♡</p>
+            <p>보고 있으면 괜히 기분 좋아지는 사람</p>
+            <div class="무드표시">예쁨 + 귀여움 + 옛날 인터넷 감성</div>
+        </div>
+
+        <div>
+            <div class="소개">
+                <h2>자기소개</h2>
+                <p>
+                    차가운 것 같지만 따뜻한 사람.<br>
+                    주변 사람들을 편안하게 만드는 능력 보유.<br>
+                    너무 과하지 않은데, 은근히 기억에 남는 분위기.
+                </p>
+
+                <div class="작은메모">
+                    오늘의 파일 : 블랙핑크무드.zip<br>
+                    상태 : 단순한데 귀엽기
+                </div>
+            </div>
+
+            <div class="탭">
+                <div class="선택됨">자기소개</div>
+                <div>사진첩</div>
+                <div>기록장</div>
+                <div>방명록</div>
+            </div>
+
+            <div class="한줄상자">
+                <span>♡ 오늘의 기분 : 반짝반짝</span>
+                <span>✦ 요즘 무드 : 블랙핑크</span>
+                <span>☁ 한마디 : 천천히 예쁘게</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="아랫영역">
+        <div class="작은상자 새상자">
+            <h3>최근 소식</h3>
+            <p>오늘 기분 좋음</p>
+            <p>괜히 예쁜 화면 보면 하루가 좀 더 재밌어짐</p>
+            <div class="말풍선">오늘 무드 좋다아 ♡</div>
+        </div>
+
+        <div class="작은상자">
+            <h3>작은 메모</h3>
+            <div class="목록">
+                비밀파일.zip<br>
+                좋아하는말.txt<br>
+                오늘무드.bmp<br>
+                방명록.html
+            </div>
+        </div>
+
+        <div class="작은상자 새상자">
+            <h3>사진</h3>
+            <img src="https://via.placeholder.com/320x190/f0d4e5/444444?text=%EC%82%AC%EC%A7%84" alt="사진">
+        </div>
+
+        <div class="작은상자">
+            <h3>방명록</h3>
+            <p>“홈피 분위기 너무 예쁘다 ♡”</p>
+            <p>“딱 옛날 인터넷 감성이야”</p>
+            <div class="말풍선">블랙핑크 무드 켜짐 . . .</div>
+        </div>
+    </div>
+
+    <div class="하단띠">
+        <div class="흐르는글">
+            <span>김태은의 페이지에 온 걸 환영해요 ♡ 귀엽고 반짝이는 Y2K 무드 진행 중 ♡</span>
+        </div>
+    </div>
+
+    <div class="상태줄">
+        <span>상태 : 준비 완료</span>
+        <span>김태은의 작은 창 실행 중...</span>
+    </div>
+
 </div>
 
 <script>
-function reveal() {
-    const secret = document.getElementById("secret");
-    secret.style.display = "block";
-    const btn = document.querySelector("button");
-    btn.innerText = "MISSION COMPLETE 💖";
-    btn.style.background = "#fff";
-    btn.style.color = "#ff00ff";
-    btn.style.borderColor = "#ff00ff";
-}
+document.addEventListener('mousemove', function(e) {
+    if (window.innerWidth <= 760) return;
+
+    const 점 = document.createElement('div');
+    점.className = '커서반짝';
+    점.style.left = e.clientX + 'px';
+    점.style.top = e.clientY + 'px';
+    document.body.appendChild(점);
+
+    setTimeout(() => {
+        점.style.transition = 'all 0.5s ease';
+        점.style.opacity = '0';
+        점.style.transform = 'translate(-50%, -50%) scale(1.8)';
+    }, 10);
+
+    setTimeout(() => {
+        점.remove();
+    }, 520);
+});
 </script>
 
 </body>
