@@ -5,21 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HBD_MY_BESTIE_V4.0</title>
 
+<!-- 폰트 -->
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+
 <style>
 body {
     background-color: #000;
     background-image: 
         linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 30px 30px;
+    background-size: 40px 40px;
     color: #fff;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Pretendard', monospace;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
+    min-height: 100vh;
     margin: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    padding: 20px;
+
     animation: flicker 3s infinite;
 }
 
@@ -34,7 +41,8 @@ body {
     background: #c0c0c0;
     border: 3px solid;
     border-color: #fff #808080 #808080 #fff;
-    width: 420px;
+    width: 100%;
+    max-width: 420px;
     padding: 2px;
     box-shadow: 10px 10px 0px #ff00ff;
 }
@@ -60,7 +68,7 @@ body {
 
 /* 타이틀 */
 h1 {
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     color: #ff00ff;
     text-shadow: 2px 2px #00ffff;
     margin: 10px 0;
@@ -73,12 +81,13 @@ h1 {
 
 /* 프로필 */
 .profile {
-    font-size: 12px;
+    font-size: 13px;
     text-align: left;
     margin: 10px 0;
     padding: 10px;
     background: #eef;
     border: 1px solid #000;
+    line-height: 1.6;
 }
 
 /* 사진 */
@@ -100,10 +109,10 @@ h1 {
 
 /* 메시지 */
 .message {
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.8;
     border: 1px dashed #ff00ff;
-    padding: 10px;
+    padding: 12px;
     background: #fdfdfd;
     margin-top: 10px;
 }
@@ -119,7 +128,8 @@ h1 {
 /* 버튼 */
 button {
     margin-top: 15px;
-    padding: 10px 20px;
+    padding: 12px;
+    width: 100%;
     background: #c0c0c0;
     border: 2px solid;
     border-color: #fff #808080 #808080 #fff;
@@ -143,8 +153,8 @@ button:hover {
     z-index: -1;
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="decor" style="top: 10%; left: 10%;">⭐</div>
@@ -175,13 +185,13 @@ button:hover {
             <img src="https://via.placeholder.com/150">
         </div>
 
-        <!-- 기본 메시지 -->
+        <!-- 메시지 -->
         <div class="message">
             HAPPY BIRTHDAY 🎂<br>
-너는 진짜 좋은 사람이야, 내가 확실하게 말할 수 있을 만큼.<br>
-같이 있으면 괜히 마음이 편해지고 좋아.<br>
-그래서 더 잘됐으면 좋겠고, 더 행복했으면 좋겠어.<br>
-오늘은 꼭 너답게, 제일 빛나는 하루 보내 ✨
+            너는 진짜 좋은 사람이야, 내가 확실하게 말할 수 있을 만큼.<br>
+            같이 있으면 괜히 마음이 편해지고 좋아.<br>
+            그래서 더 잘됐으면 좋겠고, 더 행복했으면 좋겠어.<br>
+            오늘은 꼭 너답게, 제일 빛나는 하루 보내 ✨
         </div>
 
         <!-- 숨겨진 메시지 -->
